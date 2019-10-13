@@ -2,7 +2,7 @@
 /* Propiedades en minuscula.
  * Metodos en UpperCamelCase
  * */
-class ClaseConexion{
+class ClaseConexion {
 	public $ruta_proyecto; //(String) Ruta del proyecto.
 	public $conexion ; // (object) Con la conexion...
 	private $server; 
@@ -14,8 +14,8 @@ class ClaseConexion{
 	public function __construct()
 	{
 		$ruta_clase = __FILE__;
-		// Quitamos los /clases/ClaseConexion.php ( 26 caracteres),
-		$ruta_proyecto = substr($ruta_clase,0,-25);
+		// Quitamos los /php/ClaseConexion.php ( 26 caracteres),
+		$ruta_proyecto = substr($ruta_clase,0,-22);
 		$this->ruta_proyecto = $ruta_proyecto;
 		$this->cargarConfiguracion();
 		$this->conexion = $this->conectar();	
@@ -39,10 +39,10 @@ class ClaseConexion{
 	
 	public function cargarConfiguracion(){
 		include ($this->ruta_proyecto.'/configuracion.php');
-		$this->server =$servidorMysql;
-		$this->base = $nombrebdMysql;
-		$this->usuario = $usuarioMysql;
-		$this->contrasena = $passwordMysql;
+		$this->server =$server;
+		$this->base = $base;
+		$this->usuario = $usuario;
+		$this->contrasena = $contrasena;
 		return;
 	}
 }

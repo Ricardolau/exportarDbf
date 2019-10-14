@@ -13,14 +13,21 @@
  *
  * @author alagoro
  */
-class ModeloP {
+include ('ClaseConexion.php');
+class ModeloP extends ClaseConexion {
 
-//    protected static $instance = null;
-    protected static $db = null;
-//    protected static $tabla;
+    public $db = null;
     protected static $resultado = ['error' => 0, 'consulta' => ''];
+    public $estado =null; //String con los valores 'Conectado','Error de conexion','Desconectado
+    public function __construct() {
+        $this->db = parent::__construct();
+		//~ $this->db = parent::getConexion();
+        if (method_exists($this->db,'estado')){
+            $db =$this->db;
+            $this->estado =$db->estado;
+        }
 
-
+    }
 
     protected static function setResult($sql, $code) {
         ModeloP::$resultado['consulta'] = $sql;
@@ -28,7 +35,7 @@ class ModeloP {
     }
 
     protected static function _consulta($sql) {
-        $db = self::getDbo();
+        $db = $this->db;
 
         // Realizamos la consulta.
         $error = 0;
@@ -52,7 +59,7 @@ class ModeloP {
     //devuelve 0 se es correcto y un código de error si hubo error
     // el mensaje y la consulta se obtienen con funciones: getSQLConsulta y getErrorConsulta.
     protected static function _consultaDML($sql) {
-        $db = self::getDbo();
+        $db = $this->db;
 
         $respuesta = $db->query($sql);
 

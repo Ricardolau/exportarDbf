@@ -2,14 +2,12 @@
 /* Propiedades en minuscula.
  * Metodos en UpperCamelCase
  * */
-include ('ClaseConexion.php');
-class ClaseSession extends ClaseConexion{
+class ClaseSession{
 	private $session ;					// (array) Datos de $_SESSION actuales.
     public $estado; // indica el estado en el que esta la session al comprobarEstado.
     public function __construct()
 	{
-		parent::__construct();
-		parent::getConexion();
+		
 		$this->estado = $this->comprobarEstado(); 
 	}
 	
@@ -57,7 +55,9 @@ class ClaseSession extends ClaseConexion{
         $this->session = $_SESSION;
         return $respuesta;
 	}
-
+    public function getToken(){
+            return $this->session['token'];
+    }
     
 	
         function cerrarSession(){

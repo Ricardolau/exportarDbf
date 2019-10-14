@@ -5,6 +5,7 @@
 class ClaseConexion {
 	public $ruta_proyecto; //(String) Ruta del proyecto.
 	public $conexion ; // (object) Con la conexion...
+    public $estado; //String con los valores 'Conectado','Error de conexion','Desconectado
 	private $server; 
 	private $base;
 	private $usuario;
@@ -29,9 +30,16 @@ class ClaseConexion {
 		
 		try{
 			$db= new mysqli($this->server, $this->usuario,$this->contrasena, $this->base);
-			return $db;
+            $this->estado = "Conectado";
+            if ($db->connect_errno) {   
+                // Pudo haber un error
+                $this->estado = 'Error '.$db->connect_errno.':'.$db->connect_error;
+
+            }
+            
+ 			return $db;
 		}  catch (PDOException $e){
-			echo "ERROR: No puedes conectarte a la base de datos";
+			$this->estado = "Error de conexión";
 	
 		}
 	

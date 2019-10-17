@@ -4,6 +4,8 @@
  * */
 class ClaseConexion {
 	public $ruta_proyecto; //(String) Ruta del proyecto.
+    public $ruta_upload; //(String) Ruta del proyecto.
+
 	public $conexion ; // (object) Con la conexion...
     public $estado; //String con los valores 'Conectado','Error de conexion','Desconectado
 	private $server; 
@@ -47,6 +49,7 @@ class ClaseConexion {
 	
 	public function cargarConfiguracion(){
 		include ($this->ruta_proyecto.'/configuracion.php');
+        $this->ruta_upload = $ruta_upload;
 		$this->server =$server;
 		$this->base = $base;
 		$this->usuario = $usuario;

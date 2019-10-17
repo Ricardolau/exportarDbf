@@ -13,7 +13,7 @@
  *
  * @author alagoro
  */
-include ('ClaseConexion.php');
+include_once('ClaseConexion.php');
 class ModeloP extends ClaseConexion {
 
     public $db = null;
@@ -75,6 +75,8 @@ class ModeloP extends ClaseConexion {
     protected static function _insert($tabla, $datos, $soloSQL = false) {
         $respuesta = false;
         $updateStr = [];
+
+        
         if (is_array($datos)) {
             foreach ($datos as $key => $value) {
                 $updateStr[] = $key . ' = \'' . $value . '\'';
@@ -83,7 +85,7 @@ class ModeloP extends ClaseConexion {
             $updateStr[] = $datos;
         }
         $updateString = implode(', ', $updateStr);
-
+        // Utilizar la forma inserta set en la que manda campo=valor
         $sql = 'INSERT ' . $tabla
                 . ' SET ' . $updateString;
 
